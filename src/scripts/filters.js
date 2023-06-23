@@ -27,17 +27,29 @@ export function filterByRange (array) {
 export function filterByType (array){
     const genderButtons = document.querySelectorAll(".gender__button")
     const none = document.querySelector(".music-albums__area")
+    const filterRange = document.querySelector("#filter-range")
 
     genderButtons.forEach((genderButton => {
         genderButton.addEventListener("click", (event) => {
             const buttonText = event.target.innerText 
             console.log(buttonText)
-        
+            
             if (buttonText === "Todos"){
+                filterRange.value = 90
+                const priceRange = document.querySelector("#price-range")
+
+                priceRange.innerText = Number(filterRange.value).toFixed(2)
+                   
                 renderAlbums(array)
                 filterByRange(array)
             } else {
                 const filtered = array.filter(album => album.category == genderButton.id)
+                filterRange.value = 90
+
+                const priceRange = document.querySelector("#price-range")
+
+                priceRange.innerText = Number(filterRange.value).toFixed(2)
+
                 renderAlbums(filtered)
                 filterByRange(filtered)
                 if (none.getElementsByTagName("li").length === 0){  
